@@ -570,7 +570,6 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
   const progress = calculateProgress();
   const isComplete = progress === 100 && tracks.length > 0;
   const isWeekendDay = selectedDate.getDay() === 0 || selectedDate.getDay() === 6;
-  const canClaimFreeWeekend = isWeekendDay && !hasCheckedInSelectedDate && tracks.length === 0;
 
   const renderButton = () => {
     if (hasCheckedInSelectedDate && pointsToClaim <= 0) {
@@ -585,7 +584,7 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
       );
     }
 
-    if (isComplete || pointsToClaim > 0 || canClaimFreeWeekend) {
+    if (isComplete || pointsToClaim > 0) {
       return (
         <button 
           onClick={handleClaim}
@@ -603,7 +602,7 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
         className="w-full py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 bg-white/5 text-gray-500 cursor-not-allowed border border-white/5"
       >
         <Trophy size={24} />
-        {isWeekendDay ? 'Complete 100% to Claim Point Savings' : 'Complete 100% to Check-In'}
+        {tracks.length === 0 ? 'No tracks set for today' : (isWeekendDay ? 'Complete 100% to Claim Point Savings' : 'Complete 100% to Check-In')}
       </button>
     );
   };
@@ -741,7 +740,14 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
           </div>
           <div className="flex flex-col">
             <div className="text-xs text-gray-400">MPC Anomalist</div>
-            <div className="font-bold text-white text-lg leading-tight">{currentUser.appUsername}</div>
+            <div className="font-bold text-white text-lg leading-tight flex items-center gap-2">
+              {currentUser.appUsername}
+              {currentUser.premiumStatus === 'approved' && (
+                <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-[9px] px-1.5 py-0.5 rounded flex items-center gap-0.5" title="Premium Verified">
+                  <Star size={8} className="fill-black" /> PRO
+                </div>
+              )}
+            </div>
             <div className="text-[10px] text-neon-green mt-0.5 flex items-center gap-1 opacity-80">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Online
             </div>
@@ -1012,6 +1018,11 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
                 <div className="mt-2 text-center">
                    <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
                        {currentUser.appUsername}
+                       {currentUser.premiumStatus === 'approved' && (
+                         <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-xs px-2 py-0.5 rounded flex items-center gap-1" title="Premium Verified">
+                           <Star size={10} className="fill-black" /> PRO
+                         </div>
+                       )}
                    </h2>
                    <div className="text-gray-400 text-xs mt-2 font-mono bg-white/5 px-3 py-1 rounded-full inline-block border border-white/5">
                        ID: {currentUser.id.slice(-6)}

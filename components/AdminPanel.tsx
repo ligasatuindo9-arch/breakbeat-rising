@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Trash2, Save, ArrowLeft, Plus, Settings, Database, Cloud, CloudOff, Download, Upload, ListMusic, Loader2, RefreshCw, Users, CheckCircle2, Clock, Music, Search, Filter, XCircle, BarChart3, Calendar, Copy, Key, Lock, ShieldCheck, Eye, X, User as UserIcon, Link as LinkIcon, Headphones, CalendarCheck, MessageCircle, ExternalLink, Circle, Edit2 } from 'lucide-react';
+import { Trash2, Save, ArrowLeft, Plus, Settings, Database, Cloud, CloudOff, Download, Upload, ListMusic, Loader2, RefreshCw, Users, CheckCircle2, Clock, Music, Search, Filter, XCircle, BarChart3, Calendar, Copy, Key, Lock, ShieldCheck, Eye, X, User as UserIcon, Link as LinkIcon, Headphones, CalendarCheck, MessageCircle, ExternalLink, Circle, Edit2, Star } from 'lucide-react';
 import { TargetTrack, CloudConfig, User, WeeklySchedule, LastFmTrack } from '../types';
 import { storageService } from '../services/storage';
 import { fetchRecentTracks } from '../services/lastFmService';
@@ -890,8 +890,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onExit }) => {
                                         return (
                                             <tr key={user.id} className="group hover:bg-white/5 transition-colors">
                                                 <td className={`py-4 pl-2 align-middle font-bold ${checkedIn ? 'text-white' : 'text-red-400'}`}>
-                                                    <div className="flex flex-col">
-                                                        <span>{user.appUsername}</span>
+                                                    <div className="flex flex-col gap-1">
+                                                        <div className="flex items-center gap-2">
+                                                          <span>{user.appUsername}</span>
+                                                          {user.premiumStatus === 'approved' && (
+                                                            <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-[8px] px-1 py-0 rounded inline-flex items-center gap-0.5" title="Premium Verified">
+                                                              <Star size={6} className="fill-black" /> PRO
+                                                            </div>
+                                                          )}
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td className="py-4 align-middle text-gray-400 text-[10px] font-mono leading-tight">
