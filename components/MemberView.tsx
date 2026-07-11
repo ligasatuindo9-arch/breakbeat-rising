@@ -735,11 +735,13 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
       {/* User Header */}
       <div className="w-full flex justify-between items-center mb-4 bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors cursor-pointer" onClick={openProfile}>
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center font-bold text-xl uppercase shadow-lg shadow-purple-500/20 shrink-0">
-            {currentUser.appUsername.charAt(0)}
-          </div>
+          <img 
+            src={`https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.appUsername)}&background=random&color=fff&size=128&bold=true`} 
+            alt={currentUser.appUsername}
+            className="w-12 h-12 rounded-full shadow-lg shadow-purple-500/20 shrink-0 object-cover"
+          />
           <div className="flex flex-col">
-            <div className="text-xs text-gray-400">MPC Anomalist</div>
+            <div className="text-xs text-gray-400">MPC Breakbeat Rising</div>
             <div className="font-bold text-white text-lg leading-tight flex items-center gap-2">
               {currentUser.appUsername}
               {currentUser.premiumStatus === 'approved' && (
@@ -999,7 +1001,11 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
              
              {/* Avatar (Moved OUTSIDE scrollable area to prevent clipping) */}
              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full bg-[#16133a] border-4 border-[#0f0c29] flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-30">
-                <div className="text-3xl font-bold text-white uppercase">{currentUser.appUsername.charAt(0)}</div>
+                <img 
+                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.appUsername)}&background=random&color=fff&size=256&bold=true`}
+                  alt={currentUser.appUsername}
+                  className="w-full h-full rounded-full object-cover"
+                />
                 {!isEditingProfile && (
                     <button 
                     onClick={() => setIsEditingProfile(true)}
@@ -1227,9 +1233,11 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
                                  
                                  <div className="flex items-start justify-between gap-3 relative z-10">
                                      <div className="relative shrink-0 mt-1">
-                                         <div className="w-10 h-10 rounded-full bg-black border border-white/10 flex items-center justify-center font-bold text-lg text-white">
-                                             {account.username ? account.username.charAt(0).toUpperCase() : '?'}
-                                         </div>
+                                         <img 
+                                           src={`https://ui-avatars.com/api/?name=${encodeURIComponent(account.username || 'User')}&background=random&color=fff&size=128&bold=true`}
+                                           alt={account.username || 'User'}
+                                           className="w-10 h-10 rounded-full object-cover border border-white/10"
+                                         />
                                          {isPrimary && (
                                              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center border border-black">
                                                  <Star size={8} className="text-white fill-current" />

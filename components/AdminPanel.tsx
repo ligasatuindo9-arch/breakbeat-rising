@@ -578,7 +578,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onExit }) => {
           <div className="flex items-center gap-2 mb-1">
             <ShieldCheck size={18} className="text-pink-500" />
             <span className="text-xs md:text-sm text-pink-400/90 font-bold uppercase tracking-[0.2em]">
-               MPC Anomalist
+               MPC Breakbeat Rising
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">
@@ -1225,7 +1225,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onExit }) => {
                 
                 {/* Avatar (Absolute on top) */}
                 <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full bg-[#16133a] border-4 border-[#0f0c29] flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] z-30">
-                    <div className="text-3xl font-bold text-white uppercase">{viewingUser.appUsername.charAt(0)}</div>
+                    <img 
+                      src={`https://ui-avatars.com/api/?name=${encodeURIComponent(viewingUser.appUsername)}&background=random&color=fff&size=256&bold=true`}
+                      alt={viewingUser.appUsername}
+                      className="w-full h-full rounded-full object-cover"
+                    />
                 </div>
 
                 {/* Content (Flex-1 Scrollable) */}
