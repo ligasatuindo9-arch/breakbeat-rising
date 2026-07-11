@@ -1313,6 +1313,46 @@ export const MemberView: React.FC<MemberViewProps> = ({ weeklySchedule, currentU
                          );
                      })}
 
+                     <div className="border-t border-white/10 my-4"></div>
+                     <div className="flex justify-between items-center mb-2">
+                         <div>
+                             <label className="text-xs font-bold text-gray-500 uppercase block">Spotify Accounts</label>
+                             <span className="text-[10px] text-gray-400">{(currentUser.verifiedSpotifyAccounts || []).length} Accounts Connected</span>
+                         </div>
+                         <button 
+                           onClick={handleConnectSpotify}
+                           className="text-xs text-green-400 hover:text-green-300 font-bold flex items-center gap-1"
+                         >
+                           + Add Account
+                         </button>
+                     </div>
+
+                     {(currentUser.verifiedSpotifyAccounts || []).map((account, index) => (
+                         <div key={index} className="p-4 rounded-xl bg-black/20 border border-white/5 mb-3 flex justify-between items-center relative overflow-hidden">
+                             {/* Optional glow for first/primary account */}
+                             {index === 0 && <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>}
+                             <div className="flex items-center gap-3 relative z-10">
+                                 <div className="w-10 h-10 rounded-full bg-[#1DB954]/20 text-[#1DB954] flex items-center justify-center border border-[#1DB954]/30 shrink-0">
+                                     <Music size={20} />
+                                 </div>
+                                 <div className="overflow-hidden">
+                                     <div className="font-bold text-white text-sm truncate">{account.email || account.id}</div>
+                                     <div className="text-[10px] text-gray-400">
+                                         Plan: <span className="text-[#1DB954] uppercase">{account.plan}</span>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div className="text-[10px] text-gray-500 flex flex-col items-end gap-1 relative z-10">
+                                 <span>{new Date(account.addedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
+                                 {index === 0 && (
+                                     <span className="bg-[#1DB954] text-black px-1.5 py-0.5 rounded text-[8px] font-bold uppercase">Primary</span>
+                                 )}
+                             </div>
+                         </div>
+                     ))}
+
+                     <div className="border-t border-white/10 my-4"></div>
+
                      <div>
                         <label className="text-xs font-bold text-gray-500 uppercase block mb-1">App Password</label>
                         <div className="relative">
